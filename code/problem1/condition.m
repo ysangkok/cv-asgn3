@@ -10,19 +10,27 @@ function [U,T] = condition(points)
 %%
 
 % Conditioning: scale and shift points to be in [-1..1]
+
+normsXi = [];
+for i=1:length(points(1,:))
+    normsXi(i) = norm(points(:,i));
+end
+s = 0.5 * max(normsXi);
+
+t = mean(points');
+
+T = [1/s 0 -t(1)/s;
+     0 1/s -t(2)/s;
+     0 0 1]
+size(T)
 size(points)
-s = 0.5 * norm(points, 1)
-tx = mean(mean(points, 1))
-ty = mean(mean(points, 2))
-%size(t)
-T = [1/s 0 -tx/s;
-    0 1/s -ty/s;
-    0 0 1]
-U = imfilter(points, T, 'replicate');
 
-lastMean(U);
-assert(lastMean(1) == 0 && lastMean(2) == 0, ...
-    'Conditionned matrix should have mean of [0, 0].');
-assert(isfloat(U) & min(U(:)) >= 0 & max(U(:)) <= 1, ...
-    'The values of U should be floating point numbers between -1 and 1.');
-
+U = T * points ;
+ 
+% Verification
+meanU = mean(U');
+espilon = 1e-10;
+assert(meanU(1) < espilon && meanU(2) < espilon, ...
+     'Conditionned matrix should have mean of [0, 0].');
+assert(isfloat(U) && min(U(:)) >= -1 && max(U(:)) <= 1, ...
+     'The values of U should be floating point numbers between -1 and 1.');

@@ -5,12 +5,12 @@ addpath(genpath('../problem1'));
 addpath(genpath('../../data'));
 
 
-% Load the images and data:
+%% Load the images and data:
 im1 = im2double(imread('a3p2a.png'));
 im2 = im2double(imread('a3p2b.png'));
 load('points.mat'); % gives you points1 and points2 variables
 
-% Display the correspondences:
+%% Display the correspondences:
 figure,
 imshow(im1)
 hold on 
@@ -24,19 +24,22 @@ plot(points2(:,1),points2(:,2) ,'yx')
 hold off
 
 %% Compute homogeneous coordinates
-siz = size(points1);
-a = ones([siz(1) 1]);
-hpoints1 = cat(2, points1, a)
-hpoints2 = cat(2, points2, a)
+a = ones([1 length(points1(:,1))]);
+hpoints1 = cat(1, points1', a);
+size(hpoints1)
+hpoints2 = cat(1, points2', a);
+size(hpoints2)
 
-% Compute the fundamental matrix using 'eightpoint':
-%% Compute the mean
+%% Compute the fundamental matrix using 'eightpoint':
+
+% Conditionnig 
 condition(hpoints1)
+condition(hpoints2)
 
-% Draw epipolar lines using 'show_epipolar':
+%% Draw epipolar lines using 'show_epipolar':
 
 
-% Check the epipolar constraints by computing the reprojection error:
+%% Check the epipolar constraints by computing the reprojection error:
 
 
 
