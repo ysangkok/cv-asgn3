@@ -13,8 +13,12 @@ function [im1mask,im2mask] = make_masks(height,width,boundary)
 %     im2mask     mask for right image
 %%
 
-im1mask =
-im2mask =
+im = zeros(height, width);
+im(:,:) = 1;
+im1mask = im;
+im1mask(:, width-boundary:width) = 0; % invalid pixels
+im2mask = im;
+im2mask(:, 1:boundary) = 0; % invalid pixels
 
 % format check
 assert(islogical(im1mask) && islogical(im2mask));

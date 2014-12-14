@@ -13,7 +13,9 @@ function keypoints = detect_keypoints(im,mask,sigma,fsize,threshold)
 %                  where M is the number of detected keypoints.
 %%
 
-keypoints =
+invalid = find(mask);
+img = rgb2gray(im(invalid));
+[keypoints, harris] = harris(img, sigma, fsize, threshold);
 
 % format check
 assert(isfloat(keypoints) && size(keypoints,2) == 2);

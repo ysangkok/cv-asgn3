@@ -25,9 +25,15 @@ im2 = im2double(imread('a3p1b.png'));
 
 % Make masks for left/right half of images using 'make_masks':
 % INSERT CODE HERE
+[height,width] = size(im1);
+[im1mask,im2mask] = make_masks(height,width,boundary);
+figure;
+imshow([im1mask,im2mask]);
 
 % Keypoint detection using 'detect_keypoints':
 % INSERT CODE HERE
+im1keypoints = detect_keypoints(im1,im1mask,sigma,fsize,harris_threshold);
+im2keypoints = detect_keypoints(im2,im2mask,sigma,fsize,harris_threshold);
 
 %===================================================================
 
