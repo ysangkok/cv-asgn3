@@ -27,10 +27,9 @@ im2 = im2double(imread('a3p1b.png'));
 % INSERT CODE HERE
 [height,width] = size(im1);
 [im1mask,im2mask] = make_masks(height,width,boundary);
-ind1 = find(im1mask);
-[valid1y, valid1x] = im1mask(ind1);
-ind2 = find(im2mask);
-[valid2y, valid2x] = im2mask(ind2);
+%{
+[valid1y, valid1x] = find(im1mask);
+[valid2y, valid2x] = find(im2mask);%im2mask(ind2);
 
 % display the valid points in both images
 figure,
@@ -46,20 +45,36 @@ imshow(im2)
 hold on 
 plot(valid2x, valid2y,'yx')
 hold off
+%}
 
 % Keypoint detection using 'detect_keypoints':
 % INSERT CODE HERE
-%{
+
 im1keypoints = detect_keypoints(im1,im1mask,sigma,fsize,harris_threshold);
 im2keypoints = detect_keypoints(im2,im2mask,sigma,fsize,harris_threshold);
+%{
+% display the keys points in both images
+figure,
+title('image 1 : key points'),
+imshow(im1)
+hold on 
+plot(im1keypoints(:,1), im1keypoints(:,2),'rx')
+hold off
 
+figure,
+title('image 2 : valid points'),
+imshow(im2)
+hold on 
+plot(im2keypoints(:,1), im2keypoints(:,2),'rx')
+hold off
+%}
 
 %===================================================================
 
 % Extract SIFT features for keypoints using 'sift':
 % INSERT CODE HERE
-siftFeat1 = sift(im1keypoints, rgb2gray(im1), sigma);
-siftFeat2 = sift(im2keypoints, rgb2gray(im2), sigma);
+siftFeat1 = sift(im1keypoints, im1, sigma);
+siftFeat2 = sift(im2keypoints, im2, sigma);
 
 % Compute (squared) Euclidean distance matrix using 'euclidean_square_dist':
 D = euclidean_square_dist(siftFeat1,siftFeat2);
@@ -68,6 +83,7 @@ D = euclidean_square_dist(siftFeat1,siftFeat2);
 
 % Find putative matching pairs using 'find_matches':
 % INSERT CODE HERE
+%{
 pairs = find_matches(im1keypoints,im2keypoints,D);
 
 % Display putative matching pairs using 'show_matches':

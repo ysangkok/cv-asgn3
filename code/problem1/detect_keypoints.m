@@ -13,14 +13,10 @@ function keypoints = detect_keypoints(im,mask,sigma,fsize,threshold)
 %                  where M is the number of detected keypoints.
 %%
 
-valid = find(mask);
-imvalid = im(valid);
-size(im); size(imvalid);
-img = rgb2gray(im(invalid));
-[mask, harris] = harris(img, sigma, fsize, threshold);
-[py, px] = find(mask == 1);
-keyspoints = [px py];
-size(keypoints)
+[maskH, harrisF] = harris(im, sigma, fsize, threshold);
+maskKey = mask .* maskH; % logical and
+[py, px] = find(maskKey == 1);
+keypoints = [px py];
 
 % format check
 assert(isfloat(keypoints) && size(keypoints,2) == 2);
