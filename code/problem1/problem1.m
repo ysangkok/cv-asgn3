@@ -82,25 +82,25 @@ D1 = euclidean_square_dist(siftFeat1,siftFeat2);
 % INSERT CODE HERE
 D2 = chi_square_dist(siftFeat1,siftFeat2);
 D = pdist2(siftFeat1,siftFeat2);
+assert(all(D1(:) == D(:)));
 % Find putative matching pairs using 'find_matches':
 % INSERT CODE HERE
-
 pairs = find_matches(im1keypoints,im2keypoints,D);
 
 % Display putative matching pairs using 'show_matches':
 % INSERT CODE HERE
-show_matches(im1,im2,pairs);
+%show_matches(im1,im2,pairs);
 %{
 figure,
 imshow(im1)
 hold on 
-plot(pairs(2,1),pairs(2,2), 'yx')
+plot(pairs(10,1),pairs(10,2), 'yx')
 hold off
 
 figure,
 imshow(im2)
 hold on 
-plot(pairs(2,3),pairs(2,4) ,'yx')
+plot(pairs(10,3),pairs(10,4) ,'yx')
 
 hold off
 %}

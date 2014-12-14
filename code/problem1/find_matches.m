@@ -17,7 +17,6 @@ function pairs = find_matches(keypoints1,keypoints2,D)
 pairs = [];
 M1 = size(keypoints1, 1)
 M2 = size(keypoints2, 1)
-nbPairs = 0;
 if (M2 > M1)
   % reference = im1 
   for i=1:M1

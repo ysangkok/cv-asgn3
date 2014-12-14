@@ -11,8 +11,8 @@ function [sample_points1,sample_points2] = pick_samples(keypoints1,keypoints2,k)
 %       sample_points2      4x2 samples from the second image
 %%
 
-sample_points1 =
-sample_points2 =
+sample_points1 = datasample(keypoints1, 4, 'Replace',false);
+sample_points2 = datasample(keypoints2, 4, 'Replace',false);
 
 % format check
 assert(all(size(sample_points1) == [4 2]));
