@@ -77,10 +77,11 @@ siftFeat1 = sift(im1keypoints, im1, sigma);
 siftFeat2 = sift(im2keypoints, im2, sigma);
 
 % Compute (squared) Euclidean distance matrix using 'euclidean_square_dist':
-D = euclidean_square_dist(siftFeat1,siftFeat2);
+D1 = euclidean_square_dist(siftFeat1,siftFeat2);
 % 2 BONUS POINTS: compute distance matrix with 'chi_square_dist' instead
 % INSERT CODE HERE
-
+D2 = chi_square_dist(siftFeat1,siftFeat2);
+D = pdist2(siftFeat1,siftFeat2);
 % Find putative matching pairs using 'find_matches':
 % INSERT CODE HERE
 

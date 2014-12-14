@@ -17,7 +17,7 @@ assert(size(features2, 2) == 128, ...
 for i=1:size(features1,1)
   for j=1:size(features2,1)
     diff = features2(j,:) - features1(i,:);
-    D(i,j) = sqrt(sum(diff.^2, 2));
+    D(i,j) = sqrt(sum(diff.^2));
   end
 end
 
