@@ -14,8 +14,26 @@ function pairs = find_matches(keypoints1,keypoints2,D)
 %     pairs         Mx4 correspondences (putative matching pairs)
 %%
 %%
-
-pairs =
+pairs = [];
+M1 = size(keypoints1, 1)
+M2 = size(keypoints2, 1)
+nbPairs = 0;
+if (M1 > M2)
+  % reference = im1 
+  for i=1:M1
+    nbPairs = nbPairs + 1;
+    j = min(D(i,:));
+    pairs(nbPairs,:) = [keyspoints1(i,1) keyspoints1(i,2) keyspoints2(j,1), keyspoints2(j,2)];
+  end
+else
+  % reference = im2
+  for j=1:M2
+    nbPairs = nbPairs + 1;
+    i = min(D(:,j));
+    pairs(nbPairs,:) = [keyspoints1(i,1) keyspoints1(i,2) keyspoints2(j,1), keyspoints2(j,2)];
+  end
+end
 
 % format check
 assert(isfloat(pairs) && size(pairs,2) == 4);
+assert( size(pairs, 1) == min([size(keypoints1, 1)) size(keypoints2, 1)]) );
