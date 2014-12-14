@@ -83,21 +83,24 @@ D = euclidean_square_dist(siftFeat1,siftFeat2);
 
 % Find putative matching pairs using 'find_matches':
 % INSERT CODE HERE
-%{
+
 pairs = find_matches(im1keypoints,im2keypoints,D);
 
 % Display putative matching pairs using 'show_matches':
 % INSERT CODE HERE
+show_matches(im1,im2,pairs);
+%{
 figure,
 imshow(im1)
 hold on 
-plot(pairs(:,1),points1(:,2), 'yx')
+plot(pairs(2,1),pairs(2,2), 'yx')
 hold off
 
 figure,
 imshow(im2)
 hold on 
-plot(points2(:,3),points2(:,4) ,'yx')
+plot(pairs(2,3),pairs(2,4) ,'yx')
+
 hold off
 %}
 %===================================================================
