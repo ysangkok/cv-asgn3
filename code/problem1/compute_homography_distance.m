@@ -10,7 +10,7 @@ function d2 = compute_homography_distance(H,keypoints1,keypoints2)
 %    d2             vector of (squared) Euclidean distances between keypoints
 %%
 
-d2 =
+d2 = norm(H*keypoints1 - keypoints2)^2 + norm(keypoints1 - inv(H)*keypoints2)^2;
 
 % format check
 assert(isfloat(d2) && length(d2) == size(keypoints1,1));

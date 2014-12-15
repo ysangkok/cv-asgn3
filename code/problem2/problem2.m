@@ -30,11 +30,15 @@ size(hpoints1)
 hpoints2 = cat(1, points2', a);
 size(hpoints2)
 
+% Test homography
+H = compute_homography(points1,points2)
+
 %% Compute the fundamental matrix using 'eightpoint':
 
 % Conditionnig 
 condition(hpoints1)
 condition(hpoints2)
+
 
 %% Draw epipolar lines using 'show_epipolar':
 
