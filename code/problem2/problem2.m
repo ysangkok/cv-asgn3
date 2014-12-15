@@ -11,6 +11,7 @@ im2 = im2double(imread('a3p2b.png'));
 load('points.mat'); % gives you points1 and points2 variables
 
 %% Display the correspondences:
+%{
 figure,
 imshow(im1)
 hold on 
@@ -22,7 +23,7 @@ imshow(im2)
 hold on 
 plot(points2(:,1),points2(:,2) ,'yx')
 hold off
-
+%}
 %% Compute homogeneous coordinates
 a = ones([1 length(points1(:,1))]);
 hpoints1 = cat(1, points1', a);
@@ -31,7 +32,8 @@ hpoints2 = cat(1, points2', a);
 size(hpoints2)
 
 % Test homography
-H = compute_homography(points1,points2)
+[sample_points1,sample_points2] = pick_samples(points1,points2,4)
+H = compute_homography(sample_points1,sample_points2)
 
 %% Compute the fundamental matrix using 'eightpoint':
 
