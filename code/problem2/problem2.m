@@ -27,19 +27,19 @@ hold off
 %% Compute homogeneous coordinates
 a = ones([1 length(points1(:,1))]);
 hpoints1 = cat(1, points1', a);
-size(hpoints1)
+%size(hpoints1)
 hpoints2 = cat(1, points2', a);
-size(hpoints2)
+%size(hpoints2)
 
 % Test homography
-[sample_points1,sample_points2] = pick_samples(points1,points2,4)
-H = compute_homography(sample_points1,sample_points2)
+[sample_points1,sample_points2] = pick_samples(points1,points2,4);
+H = compute_homography(sample_points1,sample_points2);
 
 %% Compute the fundamental matrix using 'eightpoint':
 
 % Conditionnig 
-condition(hpoints1)
-condition(hpoints2)
+%condition(hpoints1)
+%condition(hpoints2)
 
 
 %% Draw epipolar lines using 'show_epipolar':

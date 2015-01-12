@@ -9,8 +9,24 @@ function F = eightpoint(points1,points2)
 %       F          3x3 fundamental matrix
 %%
 
+A = [points1(1,:)*points2(1,:)
+     points1(2,:)*points2(1,:)
+     points2(1,:)
+     points1(1,:)*points2(2,:)
+     points1(2,:)*points2(2,:)
+     points2(2,:)
+     points1(1,:)
+     points1(2,:)
+     1
+     ];
+ 
+[U_A,D_A,V_At] = svd(A);
+V_At = 0;
+F = U_A*D_A*V_At';
+ 
 
-F =
+
+F = 0;
 
 
 % format check
